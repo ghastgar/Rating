@@ -30,11 +30,12 @@ public class MainActivity extends Activity {
                 .describeContents();
         MapFragment.newInstance(options);
 
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(41.38, 2.17), 14.0f));
+
         MarkerOptions mrkerOptions = new MarkerOptions();
         mrkerOptions.position(new LatLng(41.38, 2.17)).draggable(true).describeContents();
-
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(41.38, 2.17), 14.0f));
         mMap.addMarker(mrkerOptions);
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
