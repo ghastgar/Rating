@@ -20,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <fragment
-        android:name="com.curs.pau.fragmentsbasic.fragments.BasicFragment"
+    <!-- al contrari que en un fragment no li
+            donem name perque el canviem des de la classe -->
+    <FrameLayout
         android:id="@+id/content_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
