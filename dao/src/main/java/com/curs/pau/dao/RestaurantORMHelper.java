@@ -1,6 +1,7 @@
 package com.curs.pau.dao;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -23,6 +24,7 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper{
         super(context, "RESTAURANTS_ORM.db", null, DATABASE_VERSION);
     }
 
+    // quan es crea el fitxer per 1r cop, creem tambe la BD.
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
@@ -33,5 +35,21 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper{
             Log.e("ORM Error", "onCreate Error");
             throw new RuntimeException();
         }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase database,
+                          ConnectionSource connectionSource,
+                          int oldVersion, int newVersion) {
+        try {
+            TableUtils.dropTable(connectionSource, RestaurantORMDao.class, true);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public Dao<RestaurantORMDao, Integer> getDao() throws SQLException {
+        restaurantDao = super.getDao(RestaurantORMDao.class);
+        return restaurantDao;
     }
 }

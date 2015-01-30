@@ -51,7 +51,7 @@ public class RestaurantORMDao {
         this.type = type;
     }
 
-    public RestaurntORMDao(String name, int rate, String type) {
+    public RestaurantORMDao(String name, int rate, String type) {
         this.name = name;
         this.rate = rate;
         this.type = type;
