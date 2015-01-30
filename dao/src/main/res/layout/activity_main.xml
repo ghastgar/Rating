@@ -23,9 +23,17 @@
             android:layout_marginLeft="20dp"
             android:id="@+id/rate"
             android:hint="Rating"
+            android:inputType="number"
             android:layout_weight="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:paddingLeft="10dp"
+            android:id="@+id/esborra"
+            android:text="X"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="@dimen/abc_action_bar_default_padding_material"
@@ -35,16 +43,24 @@
 
         <Button
             android:id="@+id/desar"
-            android:text="Desar a la BD"
+            android:text="Desar a BD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/llegir"
-            android:text="Llegir a la BD"
+            android:text="Llegir BD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+        <Button
+            android:id="@+id/drop"
+            android:textColor="#862D2E"
+            android:text="Esborrar BD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
 
     </LinearLayout>
 

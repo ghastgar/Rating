@@ -1,7 +1,6 @@
 package com.curs.pau.dao;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -43,6 +42,7 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper{
                           int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, RestaurantORMDao.class, true);
+            TableUtils.createTable(connectionSource, RestaurantORMDao.class);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
@@ -51,5 +51,13 @@ public class RestaurantORMHelper extends OrmLiteSqliteOpenHelper{
     public Dao<RestaurantORMDao, Integer> getDao() throws SQLException {
         restaurantDao = super.getDao(RestaurantORMDao.class);
         return restaurantDao;
+    }
+
+    public void clearData() {
+        try {
+            TableUtils.clearTable(connectionSource, RestaurantORMDao.class);
+        } catch (SQLException e){
+
+        }
     }
 }
