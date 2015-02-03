@@ -44,7 +44,7 @@
         android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sign up"
+        android:text="new user"
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

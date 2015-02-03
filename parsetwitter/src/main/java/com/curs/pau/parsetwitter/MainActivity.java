@@ -31,6 +31,12 @@ public class MainActivity extends ActionBarActivity {
         initComponents();
         // prevent crash if screen orientation changes
         if (savedInstanceState == null) initParse();
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void initComponents() {
