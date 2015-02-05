@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     private Button meh;
     private Button buah;
     private List<ParseObject> data;
+    private Integer k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,9 @@ public class MainActivity extends ActionBarActivity {
         spoiler = (TextView) findViewById(R.id.spoiler);
         meh = (Button) findViewById(R.id.meh);
         buah = (Button) findViewById(R.id.buah);
+        k = 0;
 
         if (savedInstanceState == null) initParse();
-        fetchOnlineData();
 
         meh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +57,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void nextSpoiler(TextView spoiler) {
-        if (data.iterator().hasNext()) spoiler.setText(data.iterator().next().getString("text"));
-        else spoiler.setText("You read all the spoilers available!");
-    }
-
     private void initParse() {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
@@ -68,18 +64,24 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void fetchOnlineData()  {
-        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Spoiler");
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (object != null) {
-                    spoiler.setText(object.getString("text"));
-                    query.setSkip(1);
-                } else {
-                    Log.d("score", "Fail retrieving the object.");
-                    Toast.makeText(getApplicationContext(), "Something was wrong", Toast.LENGTH_SHORT).show();
+        if (k != -1) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Spoilers");
+            query.setSkip(k);
+            query.getFirstInBackground(new GetCallback<ParseObject>() {
+                public void done(ParseObject object, ParseException e) {
+                    if (object != null) {
+                        spoiler.setText(object.getString("text"));
+                        ++k;
+                        //Toast.makeText(getApplicationContext(), "object != null", Toast.LENGTH_SHORT).show();
+                    } else {
+                        k = -1;
+                        spoiler.setText("Ja has llegit tots els spoilers disponibles. Afegeix-ne de nous!");
+                        Log.d("score", "Fail retrieving the object.");
+                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
