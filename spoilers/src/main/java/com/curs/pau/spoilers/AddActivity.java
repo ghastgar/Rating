@@ -30,7 +30,7 @@ public class AddActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String text = editText.getText().toString();
-                if (text == "") {
+                if (text.equals("")) {
                     Toast.makeText(getApplicationContext(), "Is this even a spoiler?", Toast.LENGTH_SHORT).show();
                 }
                 else {

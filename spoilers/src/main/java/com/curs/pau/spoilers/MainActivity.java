@@ -1,5 +1,6 @@
 package com.curs.pau.spoilers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,11 +23,12 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private TextView spoiler;
     private Button meh;
     private Button buah;
+    private Button add;
     private List<ParseObject> data;
     private Integer k;
     private Integer maxK;
@@ -39,7 +41,8 @@ public class MainActivity extends ActionBarActivity {
         spoiler = (TextView) findViewById(R.id.spoiler);
         meh = (Button) findViewById(R.id.meh);
         buah = (Button) findViewById(R.id.buah);
-        k = 0;
+        add = (Button) findViewById(R.id.add);
+        maxK = k = 0;
 
         if (savedInstanceState == null) initParse();
 
@@ -54,6 +57,15 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 fetchOnlineData();
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                k = maxK;
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -74,6 +86,7 @@ public class MainActivity extends ActionBarActivity {
                     if (object != null) {
                         spoiler.setText(object.getString("text"));
                         ++k;
+                        maxK = k;
                         //Toast.makeText(getApplicationContext(), "object != null", Toast.LENGTH_SHORT).show();
                     } else {
                         maxK = k-1;
