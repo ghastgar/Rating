@@ -1,5 +1,6 @@
 package com.curs.pau.spoilers;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private Button buah;
     private List<ParseObject> data;
     private Integer k;
+    private Integer maxK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +76,11 @@ public class MainActivity extends ActionBarActivity {
                         ++k;
                         //Toast.makeText(getApplicationContext(), "object != null", Toast.LENGTH_SHORT).show();
                     } else {
+                        maxK = k-1;
                         k = -1;
                         spoiler.setText("Ja has llegit tots els spoilers disponibles. Afegeix-ne de nous!");
                         Log.d("score", "Fail retrieving the object.");
-                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -99,10 +102,12 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.add) {
+            k = maxK;
+            Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
