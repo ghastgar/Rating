@@ -2,6 +2,8 @@ package com.curs.pau.spoilers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.shapes.Shape;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseTwitterUtils;
+import com.parse.ParseUser;
+import com.parse.twitter.Twitter;
 
 import org.w3c.dom.Text;
 
@@ -74,7 +80,7 @@ public class MainActivity extends Activity {
     private void initParse() {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "zJB0oZnkQLDjJNOvenpD8nVWSsdz8eIlmT3vhfGX", "lnkPk6JAaQTHebPgDZkTEFZkit97oUPWj7ymgR19");
+        Parse.initialize(this, getString(R.string.appID), getString(R.string.clientKey));
     }
 
     private void fetchOnlineData()  {
